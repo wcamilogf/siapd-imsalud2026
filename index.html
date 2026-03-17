@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAPD - ESE IMSALUD / ICBF 2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/roboto@4.5.8/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 scroll-smooth">
+
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-xl font-bold text-white">SIAPD 2026</h2>
+                <button id="closeSidebar" class="text-white hover:text-yellow-400">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <a href="#inicio" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-home mr-3"></i> Inicio
+                </a>
+                <a href="#guias" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-book mr-3"></i> Guías
+                </a>
+                <a href="#formatos" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-file-alt mr-3"></i> Formatos
+                </a>
+                <a href="#selector-uds" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-sitemap mr-3"></i> UDS
+                </a>
+                <a href="#cronogramas" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-calendar-alt mr-3"></i> Cronogramas
+                </a>
+                <a href="#actas" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-clipboard mr-3"></i> Actas
+                </a>
+                <a href="#enlaces" class="nav-item block px-4 py-3 text-gray-300 hover:bg-white/10 rounded-lg transition">
+                    <i class="fas fa-link mr-3"></i> Enlaces
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <header class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button id="menuToggle" class="lg:hidden text-white hover:text-yellow-400">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-heartbeat text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold">SIAPD</h1>
+                            <p class="text-sm opacity-90">ESE IMSALUD - ICBF 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-6">
+                    <a href="#inicio" class="nav-link hover:text-yellow-400 transition">Inicio</a>
+                    <a href="#guias" class="nav-link hover:text-yellow-400 transition">Guías</a>
+                    <a href="#formatos" class="nav-link hover:text-yellow-400 transition">Formatos</a>
+                    <a href="#selector-uds" class="nav-link hover:text-yellow-400 transition">UDS</a>
+                    <a href="#cronogramas" class="nav-link hover:text-yellow-400 transition">Cronogramas</a>
+                    <a href="#actas" class="nav-link hover:text-yellow-400 transition">Actas</a>
+                    <a href="#enlaces" class="nav-link hover:text-yellow-400 transition">Enlaces</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Servicio Integrado de Atención y Prevención de la Desnutrición</h2>
+                    <p class="text-lg opacity-90 mb-6">Convenio Interadministrativo ESE IMSALUD - ICBF 2026</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="stats-card rounded-xl p-4 text-center border border-white/20">
+                            <div class="text-3xl font-bold text-yellow-400">2</div>
+                            <div class="text-sm opacity-80">Unidades (UDS)</div>
+                        </div>
+                        <div class="stats-card rounded-xl p-4 text-center border border-white/20">
+                            <div class="text-3xl font-bold text-green-400">15+</div>
+                            <div class="text-sm opacity-80">Documentos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <img src="https://image.qwenlm.ai/public_source/28e60627-6988-46ec-bc1e-dee385e21bdf/16a48c568-b64e-40c9-b2e6-2304f04df33b.png" alt="SIAPD" class="rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="guias" class="py-12 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Guías y Manuales</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://drive.google.com/file/d/1PDur86A_xqBjykIyACz2TRJSh-xAthwx/view" target="_blank" class="card-hover p-6 bg-gray-50 rounded-xl border">
+                    <i class="fas fa-file-pdf text-red-500 text-3xl mb-4"></i>
+                    <h3 class="font-bold">Guía Operativa</h3>
+                </a>
+                </div>
+        </div>
+    </section>
+
+    <section id="formatos" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <i class="fas fa-file-alt text-green-600 mr-3"></i>Formatos
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="https://docs.google.com/document/d/1UuJVog8XbwHZMfPYG0L1DRZgQSjnJ9uW/edit?usp=sharing" target="_blank" class="card-hover bg-white rounded-xl p-6 shadow block">
+                <div class="flex items-center space-x-4">
+                    <div class="document-icon xlsx-icon"><i class="fas fa-file-excel text-xl"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Formato de Vinculación</h4>
+                        <p class="text-sm text-gray-500">CUÉNTAME V2</p>
+                    </div>
+                </div>
+            </a>
+            </div>
+    </div>
+</section>
+
+    <section id="selector-uds" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Unidades de Servicio (UDS)</h2>
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-white rounded-lg p-1 shadow">
+                    <button class="tab-button active px-6 py-3 rounded-md" data-uds="cucuta">Cúcuta (UDS 1)</button>
+                    <button class="tab-button px-6 py-3 rounded-md" data-uds="elzulia">El Zulia (UDS 2)</button>
+                </div>
+            </div>
+
+            <div id="uds-cucuta" class="uds-section active">
+                <div class="p-8 bg-blue-50 rounded-xl text-center">
+                    <h3 class="text-xl font-bold text-blue-800">Panel UDS Cúcuta</h3>
+                    <p>Acceso a carpetas y reportes específicos de Cúcuta.</p>
+                </div>
+            </div>
+
+            <div id="uds-elzulia" class="uds-section">
+                <div class="p-8 bg-green-50 rounded-xl text-center">
+                    <h3 class="text-xl font-bold text-green-800">Panel UDS El Zulia</h3>
+                    <p>Acceso a carpetas y reportes específicos de El Zulia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="font-bold text-xl mb-2">SIAPD 2026</h3>
+            <p class="opacity-70">ESE IMSALUD - ICBF</p>
+            <p class="text-xs mt-8 opacity-50">© 2026 Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg transition opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
