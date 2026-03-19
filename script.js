@@ -57,36 +57,43 @@ const dbUDS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // NAVEGACIÓN GENERAL
+    // NAVEGACIÓN
     const btnNav = document.querySelectorAll('.btn-navegacion');
     const sections = document.querySelectorAll('.seccion-contenido');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
     btnNav.forEach(btn => btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetId = btn.getAttribute('href').substring(1);
+        const target = btn.getAttribute('href').substring(1);
         sections.forEach(s => s.classList.remove('activa'));
-        document.getElementById(targetId).classList.add('activa');
-        document.getElementById('sidebar').classList.remove('active');
-        document.getElementById('overlay').classList.remove('active');
+        document.getElementById(target).classList.add('activa');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
         window.scrollTo(0,0);
     }));
 
     document.getElementById('menuToggle').addEventListener('click', () => {
-        document.getElementById('sidebar').classList.add('active');
-        document.getElementById('overlay').classList.add('active');
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
     });
 
-    // LÓGICA CRONOGRAMAS
+    document.getElementById('closeSidebar').addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    // CRONOGRAMAS
     const sTipoCron = document.getElementById('select-tipo-cron');
     const sUdsCron = document.getElementById('select-uds-cron');
     const sMesCron = document.getElementById('select-mes-cron');
     
     function updateCron() {
-        const tipo = sTipoCron.value;
-        const uds = sUdsCron.value;
-        const mes = sMesCron.value;
+        const tipo = sTipoCron.value; const uds = sUdsCron.value; const mes = sMesCron.value;
         let url = "";
         if(tipo === 'comunitarios' && mes) url = dbCron.comunitarios[mes];
         if(tipo === 'hogar' && uds && mes) url = dbCron.hogar[uds][mes];
+        
         if(url) {
             document.getElementById('frame-cron').src = url;
             document.getElementById('visor-cron').classList.remove('hidden');
@@ -102,45 +109,38 @@ document.addEventListener('DOMContentLoaded', () => {
     sUdsCron.addEventListener('change', updateCron);
     sMesCron.addEventListener('change', updateCron);
 
-    // LÓGICA UDS (CAMBIO DE PESTAÑAS)
+    // UDS
     const tabBtns = document.querySelectorAll('.tab-button');
     const udsSections = document.querySelectorAll('.uds-section');
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            tabBtns.forEach(b => b.classList.remove('active'));
-            udsSections.forEach(s => s.classList.add('hidden'));
-            udsSections.forEach(s => s.classList.remove('active'));
-            
-            btn.classList.add('active');
-            const targetPanel = document.getElementById(`uds-${btn.dataset.uds}`);
-            targetPanel.classList.remove('hidden');
-            targetPanel.classList.add('active');
+    tabBtns.forEach(btn => btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        udsSections.forEach(s => s.classList.add('hidden'));
+        udsSections.forEach(s => s.classList.remove('active'));
+        
+        btn.classList.add('active');
+        const target = document.getElementById(`uds-${btn.dataset.uds}`);
+        target.classList.remove('hidden');
+        target.classList.add('active');
+    }));
+
+    document.querySelectorAll('.select-uds-doc').forEach(sel => sel.addEventListener('change', (e) => {
+        const uds = e.target.dataset.uds;
+        const tipo = e.target.dataset.tipo;
+        const mes = e.target.value;
+        const panel = e.target.closest('.uds-section');
+        const visor = panel.querySelector('.visor-uds');
+        const frame = panel.querySelector('.frame-uds');
+
+        panel.querySelectorAll('.select-uds-doc').forEach(s => {
+            if(s !== e.target) s.value = "";
         });
-    });
 
-    // SELECTORES DE DOCUMENTOS UDS
-    const selectoresUDS = document.querySelectorAll('.select-uds-doc');
-    selectoresUDS.forEach(select => {
-        select.addEventListener('change', (e) => {
-            const uds = e.target.dataset.uds;
-            const tipo = e.target.dataset.tipo;
-            const mes = e.target.value;
-            const panel = e.target.closest('.uds-section');
-            const visor = panel.querySelector('.visor-uds');
-            const frame = panel.querySelector('.frame-uds');
-
-            // Limpiar el otro selector de la misma UDS
-            panel.querySelectorAll('.select-uds-doc').forEach(s => {
-                if(s !== e.target) s.value = "";
-            });
-
-            if (mes) {
-                frame.src = dbUDS[uds][tipo][mes];
-                visor.classList.remove('hidden');
-            } else {
-                visor.classList.add('hidden');
-            }
-        });
-    });
+        if(mes) {
+            frame.src = dbUDS[uds][tipo][mes];
+            visor.classList.remove('hidden');
+        } else {
+            visor.classList.add('hidden');
+        }
+    }));
 });
