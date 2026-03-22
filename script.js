@@ -57,90 +57,50 @@ const dbUDS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // SEGURIDAD
+    const CLAVE = "SIAPD2026*";
+    const login = document.getElementById('login-screen');
+    const main = document.getElementById('main-content');
+    const pass = document.getElementById('access-password');
+    if(sessionStorage.getItem('acceso') === 'true'){ login.style.display='none'; main.style.display='block'; }
+    document.getElementById('btn-login').onclick = () => {
+        if(pass.value === CLAVE){ sessionStorage.setItem('acceso','true'); login.style.opacity='0'; setTimeout(()=>{login.style.display='none'; main.style.display='block';},500); }
+        else{ document.getElementById('login-error').classList.remove('hidden'); pass.value=""; }
+    };
+
     // NAVEGACIÓN
-    const btnNav = document.querySelectorAll('.btn-navegacion');
-    const sections = document.querySelectorAll('.seccion-contenido');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-
-    btnNav.forEach(btn => btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = btn.getAttribute('href').substring(1);
-        sections.forEach(s => s.classList.remove('activa'));
+    document.querySelectorAll('.btn-navegacion').forEach(btn => btn.onclick = (e) => {
+        e.preventDefault(); const target = btn.getAttribute('href').substring(1);
+        document.querySelectorAll('.seccion-contenido').forEach(s => s.classList.remove('activa'));
         document.getElementById(target).classList.add('activa');
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
+        document.getElementById('sidebar').classList.remove('active'); document.getElementById('overlay').classList.remove('active');
         window.scrollTo(0,0);
-    }));
-
-    document.getElementById('menuToggle').addEventListener('click', () => {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
     });
-
-    document.getElementById('closeSidebar').addEventListener('click', () => {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-    });
+    document.getElementById('menuToggle').onclick = () => { document.getElementById('sidebar').classList.add('active'); document.getElementById('overlay').classList.add('active'); };
+    document.getElementById('closeSidebar').onclick = () => { document.getElementById('sidebar').classList.remove('active'); document.getElementById('overlay').classList.remove('active'); };
 
     // CRONOGRAMAS
-    const sTipoCron = document.getElementById('select-tipo-cron');
-    const sUdsCron = document.getElementById('select-uds-cron');
-    const sMesCron = document.getElementById('select-mes-cron');
-    
-    function updateCron() {
-        const tipo = sTipoCron.value; const uds = sUdsCron.value; const mes = sMesCron.value;
-        let url = "";
-        if(tipo === 'comunitarios' && mes) url = dbCron.comunitarios[mes];
-        if(tipo === 'hogar' && uds && mes) url = dbCron.hogar[uds][mes];
-        
-        if(url) {
-            document.getElementById('frame-cron').src = url;
-            document.getElementById('visor-cron').classList.remove('hidden');
-        } else {
-            document.getElementById('visor-cron').classList.add('hidden');
-        }
+    const sTipo = document.getElementById('select-tipo-cron'); const sUds = document.getElementById('select-uds-cron'); 
+    const sMes = document.getElementById('select-mes-cron'); const btnL = document.getElementById('btn-link-cron');
+    function upCron(){
+        let url = (sTipo.value==='comunitarios') ? dbCron.comunitarios[sMes.value] : (sTipo.value==='hogar'&&sUds.value) ? dbCron.hogar[sUds.value][sMes.value] : "";
+        if(url){ document.getElementById('frame-cron').src=url; btnL.href=url.replace('/preview','/edit'); document.getElementById('visor-cron').classList.remove('hidden'); }
     }
-    sTipoCron.addEventListener('change', () => {
-        sUdsCron.classList.toggle('hidden', sTipoCron.value !== 'hogar');
-        sMesCron.classList.toggle('hidden', !sTipoCron.value);
-        updateCron();
-    });
-    sUdsCron.addEventListener('change', updateCron);
-    sMesCron.addEventListener('change', updateCron);
+    sTipo.onchange = () => { sUds.classList.toggle('hidden', sTipo.value!=='hogar'); sMes.classList.toggle('hidden', !sTipo.value); upCron(); };
+    sUds.onchange = sMes.onchange = upCron;
 
     // UDS
-    const tabBtns = document.querySelectorAll('.tab-button');
-    const udsSections = document.querySelectorAll('.uds-section');
-
-    tabBtns.forEach(btn => btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        udsSections.forEach(s => s.classList.add('hidden'));
-        udsSections.forEach(s => s.classList.remove('active'));
-        
-        btn.classList.add('active');
-        const target = document.getElementById(`uds-${btn.dataset.uds}`);
-        target.classList.remove('hidden');
-        target.classList.add('active');
-    }));
-
-    document.querySelectorAll('.select-uds-doc').forEach(sel => sel.addEventListener('change', (e) => {
-        const uds = e.target.dataset.uds;
-        const tipo = e.target.dataset.tipo;
-        const mes = e.target.value;
-        const panel = e.target.closest('.uds-section');
-        const visor = panel.querySelector('.visor-uds');
-        const frame = panel.querySelector('.frame-uds');
-
-        panel.querySelectorAll('.select-uds-doc').forEach(s => {
-            if(s !== e.target) s.value = "";
-        });
-
-        if(mes) {
-            frame.src = dbUDS[uds][tipo][mes];
-            visor.classList.remove('hidden');
-        } else {
-            visor.classList.add('hidden');
-        }
-    }));
+    document.querySelectorAll('.tab-button').forEach(btn => btn.onclick = () => {
+        document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+        document.querySelectorAll('.uds-section').forEach(s=>s.classList.add('hidden')); document.getElementById(`uds-${btn.dataset.uds}`).classList.remove('hidden');
+    });
+    document.querySelectorAll('.select-uds-doc').forEach(sel => sel.onchange = (e) => {
+        const uds=sel.dataset.uds, tipo=sel.dataset.tipo, mes=sel.value, panel=sel.closest('.uds-section'), visor=panel.querySelector('.visor-uds'), frame=panel.querySelector('.frame-uds'), btnLU=panel.querySelector('.btn-link-uds');
+        panel.querySelectorAll('.select-uds-doc').forEach(s => {if(s!==sel) s.value="";});
+        if(mes){ 
+            const url = dbUDS[uds][tipo][mes]; frame.src=url;
+            btnLU.href = (tipo==='revision') ? url.replace('/preview','/edit') : url.replace('embeddedfolderview?id=','drive/folders/').replace('#list','');
+            visor.classList.remove('hidden'); 
+        } else visor.classList.add('hidden');
+    });
 });

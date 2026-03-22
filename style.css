@@ -1,32 +1,29 @@
 * { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
-body { display: flex; flex-direction: column; min-height: 100vh; }
+body { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
+
 .gradient-bg { background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #3b82f6 100%); }
 
+/* SEGURIDAD */
+#login-screen { z-index: 2000; transition: opacity 0.5s ease; }
+
+/* NAVEGACIÓN */
 .seccion-contenido { display: none; min-height: 80vh; animation: fadeIn 0.4s ease-in-out; }
 .seccion-contenido.activa { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.card-hover { transition: all 0.3s ease; }
-.card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-.tab-button.active { background: #1e40af; color: white; box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3); }
-
-/* VISOR GIGANTE CORREGIDO */
+/* VISOR CENTRADO */
 .preview-container {
-    width: 100%;
-    height: 850px;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    width: 95%; max-width: 1400px; height: 850px;
+    background: #fff; border-radius: 12px;
+    overflow: hidden; display: flex; flex-direction: column;
+    margin: 0 auto; border: 1px solid #e5e7eb;
 }
 .preview-container iframe { flex-grow: 1; width: 100%; height: 100%; border: none; }
+.btn-visor-container { width: 95%; max-width: 1400px; margin: 0 auto; }
 
+/* COMPONENTES */
+.tab-button.active { background: #1e40af; color: white; box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3); }
 .sidebar { position: fixed; left: 0; top: 0; height: 100vh; width: 280px; background: #0f172a; transform: translateX(-100%); transition: 0.3s ease; z-index: 1000; }
 .sidebar.active { transform: translateX(0); }
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 900; }
 .overlay.active { display: block; }
-
-.uds-section { display: none; }
-.uds-section.active { display: block; }
