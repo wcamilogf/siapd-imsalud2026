@@ -11,45 +11,26 @@
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen overflow-x-hidden">
 
-    <div id="login-screen" class="fixed inset-0 z-[3000] gradient-bg flex items-center justify-center p-4">
+    <div id="login-screen" class="fixed inset-0 z-[5000] gradient-bg flex items-center justify-center p-4">
         <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center border border-white/20">
-            <div class="w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-lock text-3xl"></i>
-            </div>
+            <div class="w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-lock text-3xl"></i></div>
             <h2 class="text-2xl font-bold text-gray-800 mb-2">SIAPD 2026</h2>
             <p class="text-gray-500 text-sm mb-6">Contenido Protegido. Ingrese la clave institucional.</p>
-            <input type="password" id="access-password" placeholder="Contraseña" class="w-full p-4 border-2 border-gray-100 rounded-xl mb-4 outline-none text-center focus:border-green-600">
+            <input type="password" id="access-password" placeholder="Contraseña" class="w-full p-4 border-2 border-gray-100 rounded-xl mb-2 outline-none text-center focus:border-green-600">
+            <p id="login-error" class="text-red-600 text-xs mb-4 invisible font-bold italic">Clave incorrecta.</p>
             <button id="btn-login" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg">Entrar</button>
-            <p id="login-error" class="text-red-500 text-xs mt-4 hidden font-bold italic">Clave incorrecta.</p>
         </div>
     </div>
 
     <div id="main-content" style="display: none;" class="w-full">
         <div class="overlay" id="overlay"></div>
         
-        <div class="sidebar" id="sidebar">
-            <div class="p-6">
-                <div class="flex items-center justify-between mb-8 text-white">
-                    <h2 class="text-xl font-bold">SIAPD 2026</h2>
-                    <button id="closeSidebar"><i class="fas fa-times text-2xl"></i></button>
-                </div>
-                <nav class="space-y-2">
-                    <a href="#inicio" class="btn-navegacion block p-3 text-white hover:bg-white/10 rounded-lg">Inicio</a>
-                    <a href="#guias" class="btn-navegacion block p-3 text-white hover:bg-white/10 rounded-lg">Guías</a>
-                    <a href="#formatos" class="btn-navegacion block p-3 text-white hover:bg-white/10 rounded-lg">Formatos</a>
-                    <a href="#cronogramas" class="btn-navegacion block p-3 text-white hover:bg-white/10 rounded-lg">Cronogramas</a>
-                    <a href="#uds" class="btn-navegacion block p-3 text-white hover:bg-white/10 rounded-lg">UDS</a>
-                    <a href="#asistente-ia" class="btn-navegacion block p-3 text-white bg-green-700 rounded-lg">Asistente IA</a>
-                </nav>
-            </div>
-        </div>
-
         <header class="gradient-bg text-white shadow-lg sticky top-0 z-50">
-            <div class="container-fluid px-4 py-3 flex justify-between items-center">
+            <div class="container-fluid px-6 py-3 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <button id="menuToggle" class="lg:hidden mr-2 text-white"><i class="fas fa-bars text-xl"></i></button>
                     <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/30"><i class="fas fa-heartbeat text-xl"></i></div>
-                    <div><h1 class="font-bold text-lg leading-none">SIAPD</h1><p class="text-[10px] opacity-80 uppercase tracking-wider">IMSALUD - ICBF 2026</p></div>
+                    <div><h1 class="font-bold text-lg leading-none">SIAPD</h1><p class="text-[10px] opacity-80 uppercase tracking-wider">ESE IMSALUD - ICBF 2026</p></div>
                 </div>
                 <nav class="hidden lg:flex items-center space-x-5 font-medium text-sm">
                     <a href="#inicio" class="btn-navegacion hover:text-yellow-400">Inicio</a>
@@ -57,125 +38,132 @@
                     <a href="#formatos" class="btn-navegacion hover:text-yellow-400">Formatos</a>
                     <a href="#cronogramas" class="btn-navegacion hover:text-yellow-400">Cronogramas</a>
                     <a href="#uds" class="btn-navegacion hover:text-yellow-400">UDS</a>
-                    <a href="#asistente-ia" class="btn-navegacion bg-white/10 px-3 py-1 rounded-lg hover:bg-white/20">Asistente IA</a>
+                    <a href="#herramientas" class="btn-navegacion hover:text-yellow-400">Herramientas</a>
                 </nav>
             </div>
         </header>
 
-        <div class="gradient-bg text-white pt-2 pb-2 text-center">
-            <h2 class="text-md md:text-xl font-bold mb-1 uppercase px-4">Servicio Integrado de Atención y Prevención de la Desnutrición</h2>
-            <img src="/images/logo_siapd.png" alt="Logo" class="h-16 md:h-20 mx-auto mb-1">
-            <p class="text-[9px] md:text-xs italic opacity-90">Convenio Interadministrativo 2026</p>
+        <div class="gradient-bg text-white pt-2 pb-2 text-center shadow-inner">
+            <h2 class="text-md md:text-xl font-bold mb-1 uppercase tracking-wide px-4">Servicio Integrado de Atención y Prevención de la Desnutrición</h2>
+            <img src="/images/logo_siapd.png" alt="Logo SIAPD" class="h-16 md:h-20 mx-auto mb-1 drop-shadow-2xl">
+            <p class="text-[10px] md:text-xs italic opacity-90">Convenio Interadministrativo ESE IMSALUD - ICBF 2026</p>
         </div>
 
         <main class="w-full">
-            <section id="inicio" class="seccion-contenido activa py-6 bg-white w-full">
-                <div class="container mx-auto px-4 text-center">
-                    <div class="bg-green-50 p-6 rounded-3xl border border-green-100 inline-block max-w-2xl mb-4">
-                        <h2 class="text-2xl font-bold mb-2 text-green-900">Bienvenidos,</h2>
-                        <p class="text-gray-600">Portal técnico para el programa SIAPD.</p>
-                    </div>
-                    <div class="flex justify-center items-center px-4">
-                        <img src="/images/foto_equipoSIAPD.jpeg" alt="Equipo" class="rounded-2xl shadow-2xl border-4 border-white img-inicio-blindada">
+            <section id="inicio" class="seccion-contenido activa py-10 bg-white w-full text-center">
+                <div class="container mx-auto px-4">
+                    <div class="bg-green-50 p-6 rounded-3xl border border-green-100 inline-block max-w-2xl shadow-sm mb-6"><h2 class="text-2xl font-bold mb-2 text-green-900">Bienvenidos,</h2><p class="text-gray-600">Portal técnico para la gestión SIAPD.</p></div>
+                    <div class="flex justify-center items-center"><img src="/images/foto_equipoSIAPD.jpeg" alt="Equipo" class="rounded-2xl shadow-2xl border-4 border-white img-inicio-blindada"></div>
+                </div>
+            </section>
+
+            <section id="guias" class="seccion-contenido py-12 bg-white w-full text-center">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold mb-12 text-gray-800">Guías Técnicas</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <a href="https://drive.google.com/file/d/1PDur86A_xqBjykIyACz2TRJSh-xAthwx/view" target="_blank" class="bg-white p-8 rounded-2xl shadow-md border hover:border-green-400 block transition-all"><i class="fas fa-file-pdf text-red-500 text-5xl mb-4"></i><h3 class="font-bold">Guía Operativa</h3></a>
+                        <a href="https://drive.google.com/file/d/1BkjVrrUcJQB2C1HIBdP_3GuuvVcc-Pt0/view" target="_blank" class="bg-white p-8 rounded-2xl shadow-md border hover:border-green-400 block transition-all"><i class="fas fa-book text-green-700 text-5xl mb-4"></i><h3 class="font-bold">Manual MAPD</h3></a>
+                        <a href="https://drive.google.com/file/d/1HJNKF0AnOuepbeHYoPsmsOmfYkopuEov/view" target="_blank" class="bg-white p-8 rounded-2xl shadow-md border hover:border-green-400 block transition-all"><i class="fas fa-map-marked-alt text-green-600 text-5xl mb-4"></i><h3 class="font-bold">Georeferenciación</h3></a>
+                        <a href="https://drive.google.com/file/d/1ZGG_c5IzVor2QwmR36KLL5HMCUmfwvrg/view" target="_blank" class="bg-white p-8 rounded-2xl shadow-md border hover:border-green-400 block transition-all"><i class="fas fa-laptop-code text-purple-600 text-5xl mb-4"></i><h3 class="font-bold">Ecosistema Digital</h3></a>
                     </div>
                 </div>
             </section>
 
-            <section id="guias" class="seccion-contenido py-12 bg-white w-full">
-                <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold mb-12 text-gray-800">Guías y Manuales Técnicos</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <a href="https://drive.google.com/file/d/1PDur86A_xqBjykIyACz2TRJSh-xAthwx/view" target="_blank" class="bg-white p-6 rounded-xl shadow-md border hover:border-green-400 block group"><i class="fas fa-file-pdf text-red-500 text-5xl mb-4"></i><h3 class="font-bold text-gray-700 text-sm">Guía Operativa 2026</h3></a>
-                        <a href="https://drive.google.com/file/d/1BkjVrrUcJQB2C1HIBdP_3GuuvVcc-Pt0/view" target="_blank" class="bg-white p-6 rounded-xl shadow-md border hover:border-green-400 block group"><i class="fas fa-book text-green-700 text-5xl mb-4"></i><h3 class="font-bold text-gray-700 text-sm">Manual Técnico MAPD</h3></a>
-                        <a href="https://drive.google.com/file/d/1HJNKF0AnOuepbeHYoPsmsOmfYkopuEov/view" target="_blank" class="bg-white p-6 rounded-xl shadow-md border hover:border-green-400 block group"><i class="fas fa-map-marked-alt text-green-600 text-5xl mb-4"></i><h3 class="font-bold text-gray-700 text-sm">Guía Georeferenciación</h3></a>
-                        <a href="https://drive.google.com/file/d/1ZGG_c5IzVor2QwmR36KLL5HMCUmfwvrg/view" target="_blank" class="bg-white p-6 rounded-xl shadow-md border hover:border-green-400 block group"><i class="fas fa-laptop-code text-purple-600 text-5xl mb-4"></i><h3 class="font-bold text-gray-700 text-sm">Ecosistema Digital</h3></a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="formatos" class="seccion-contenido py-12 bg-gray-50 w-full">
-                <div class="container mx-auto px-4 text-center">
+            <section id="formatos" class="seccion-contenido py-12 bg-gray-50 w-full text-center">
+                <div class="container mx-auto px-4">
                     <h2 class="text-3xl font-bold mb-12 text-gray-800">Repositorio de Formatos</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-                        <a href="https://www.icbf.gov.co/misionales/promocion-y-prevencion/nutricion" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-globe text-blue-600"></i><span class="font-bold text-xs">Portal ICBF Nutrición</span></a>
-                        <a href="https://docs.google.com/spreadsheets/d/1OiFZCpxcY4IAIvoCFsWiBAhWKgJoO9jn_QCGKGbpw5E/edit" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-database text-green-600"></i><span class="font-bold text-xs">BASE DE DATOS 2026</span></a>
-                        <a href="https://docs.google.com/spreadsheets/d/1jrrikCxX1pHqWrPdteEI1zxm5t4FJIb8/edit" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-file-excel text-green-500"></i><span class="font-bold text-xs">Vinculación CUENTAME</span></a>
-                        <a href="https://docs.google.com/spreadsheets/d/1ES7IyLt6csSytM8RAEiDbt1aymUirIT-/" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-id-card text-blue-500"></i><span class="font-bold text-xs">F8 Cúcuta</span></a>
-                        <a href="https://docs.google.com/spreadsheets/d/1nf-aWbPdZUd3vxkG7KVFjo2NfO6REY6R/" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-id-card text-green-500"></i><span class="font-bold text-xs">F8 El Zulia</span></a>
-                        <a href="https://docs.google.com/spreadsheets/d/1lm14ssSYQT_9vNUa9YaPUkVRqcCCxME7/" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-clock text-yellow-600"></i><span class="font-bold text-xs">Lista de Espera</span></a>
-                        <a href="https://docs.google.com/document/d/18mNGiQeRX22JaaVENEzI-3UK2Yn10ANr/edit" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-file-word text-blue-500"></i><span class="font-bold text-xs">Cero Casos DNT</span></a>
-                        <a href="https://docs.google.com/document/d/1UuJVog8XbwHZMfPYG0L1DRZgQSjnJ9uW/edit" target="_blank" class="bg-white p-4 rounded-xl border flex items-center space-x-3 hover:bg-gray-100 block"><i class="fas fa-clipboard-check text-red-600"></i><span class="font-bold text-xs">Acta IMSALUD</span></a>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+                        <a href="https://www.icbf.gov.co/misionales/promocion-y-prevencion/nutricion" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-globe text-blue-600 text-3xl"></i><span class="font-bold text-sm">Portal ICBF Nutrición</span></a>
+                        <a href="https://docs.google.com/spreadsheets/d/1OiFZCpxcY4IAIvoCFsWiBAhWKgJoO9jn_QCGKGbpw5E/edit" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-database text-green-600 text-3xl"></i><span class="font-bold text-sm">BASE DE DATOS 2026</span></a>
+                        <a href="https://docs.google.com/spreadsheets/d/1jrrikCxX1pHqWrPdteEI1zxm5t4FJIb8/edit" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-file-excel text-green-500 text-3xl"></i><span class="font-bold text-sm">Vinculación CUENTAME</span></a>
+                        <a href="https://docs.google.com/spreadsheets/d/1ES7IyLt6csSytM8RAEiDbt1aymUirIT-/" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-id-card text-blue-500 text-3xl"></i><span class="font-bold text-sm">F8 Cúcuta</span></a>
+                        <a href="https://docs.google.com/spreadsheets/d/1nf-aWbPdZUd3vxkG7KVFjo2NfO6REY6R/" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-id-card text-green-500 text-3xl"></i><span class="font-bold text-sm">F8 El Zulia</span></a>
+                        <a href="https://docs.google.com/spreadsheets/d/1lm14ssSYQT_9vNUa9YaPUkVRqcCCxME7/" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-clock text-yellow-600 text-3xl"></i><span class="font-bold text-sm">Lista de Espera</span></a>
+                        <a href="https://docs.google.com/document/d/18mNGiQeRX22JaaVENEzI-3UK2Yn10ANr/edit" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-file-word text-blue-500 text-3xl"></i><span class="font-bold text-sm">Cero Casos DNT</span></a>
+                        <a href="https://docs.google.com/document/d/1UuJVog8XbwHZMfPYG0L1DRZgQSjnJ9uW/edit" target="_blank" class="bg-white p-6 rounded-2xl border-2 border-gray-100 flex flex-col items-center justify-center text-center space-y-3 hover:bg-green-50 hover:border-green-300 hover:shadow-lg transition-all duration-300 shadow-sm"><i class="fas fa-clipboard-check text-red-600 text-3xl"></i><span class="font-bold text-sm">Acta IMSALUD</span></a>
                     </div>
                 </div>
             </section>
 
-            <section id="cronogramas" class="seccion-contenido py-10 bg-white w-full">
-                <div class="container-fluid text-center">
-                    <h2 class="text-3xl font-bold mb-8 text-gray-800">Cronogramas SIAPD</h2>
-                    <div class="max-w-4xl mx-auto bg-gray-50 p-4 rounded-2xl border grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        <select id="select-tipo-cron" class="p-3 border rounded-lg"><option value="">Tipo de Actividad</option><option value="comunitarios">Cronograma de Encuentros Comunitarios</option><option value="hogar">Cronograma Encuentros en el Hogar / Visitas</option></select>
-                        <select id="select-uds-cron" class="p-3 border rounded-lg hidden"><option value="">Unidad</option><option value="cucuta">UDS CÚCUTA</option><option value="elzulia">UDS EL ZULIA</option></select>
-                        <select id="select-mes-cron" class="p-3 border rounded-lg hidden"><option value="">Mes</option><option value="febrero">Febrero</option><option value="marzo">Marzo</option><option value="abril">Abril</option><option value="mayo">Mayo</option></select>
-                    </div>
-                    <div id="visor-cron" class="hidden w-full px-2 md:px-6">
-                        <div class="flex justify-end mb-4"><a id="btn-link-cron" href="#" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold shadow">Abrir en Sheets</a></div>
-                        <div class="preview-container w-full"><iframe id="frame-cron" class="w-full"></iframe></div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="asistente-ia" class="seccion-contenido py-20 bg-gray-50 w-full">
-                <div class="container mx-auto px-4 text-center">
-                    <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-3xl border shadow-xl">
-                        <div class="w-20 h-20 bg-green-700 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg"><i class="fas fa-robot text-4xl"></i></div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Asistente IA (DeepSeek / Z.AI)</h2>
-                        <p class="text-gray-600 mb-8 text-sm">Consultor técnico para análisis de guías y redacción de informes.</p>
-                        <a href="https://chat.z.ai/" target="_blank" class="inline-block bg-green-700 text-white font-bold px-10 py-5 rounded-2xl hover:bg-green-800 transition transform hover:scale-105 shadow-2xl"><i class="fas fa-external-link-alt mr-2"></i> Abrir Consultor IA</a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="uds" class="seccion-contenido py-10 bg-gray-100 w-full">
+            <section id="cronogramas" class="seccion-contenido py-10 bg-white w-full text-center">
                 <div class="container-fluid px-4">
-                    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Unidades de Servicio (UDS)</h2>
-                    <div class="flex justify-center mb-10">
-                        <div class="inline-flex bg-white p-1 rounded-xl shadow-md border overflow-hidden">
-                            <button class="tab-button-uds px-8 py-3 font-bold active" data-uds="cucuta">UDS CÚCUTA</button>
-                            <button class="tab-button-uds px-8 py-3 font-bold" data-uds="elzulia">UDS EL ZULIA</button>
-                        </div>
+                    <h2 class="text-3xl font-bold mb-8 text-gray-800">Visualizador de Cronogramas SIAPD</h2>
+                    <div class="max-w-4xl mx-auto bg-gray-50 p-4 rounded-2xl border grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-sm">
+                        <select id="select-tipo-cron" class="p-3 border rounded-lg">
+                            <option value="">Tipo de Actividad</option>
+                            <option value="comunitarios">Cronograma de Encuentros Comunitarios</option>
+                            <option value="hogar">Cronograma Encuentros en el Hogar / Visitas</option>
+                        </select>
+                        <select id="select-uds-cron" class="p-3 border rounded-lg hidden"><option value="">Unidad de Servicio</option><option value="cucuta">UDS CÚCUTA</option><option value="elzulia">UDS EL ZULIA</option></select>
+                        <select id="select-mes-cron" class="p-3 border rounded-lg hidden"><option value="">Mes de Consulta</option><option value="febrero">Febrero 2026</option><option value="marzo">Marzo 2026</option><option value="abril">Abril 2026</option><option value="mayo">Mayo 2026</option></select>
                     </div>
-                    <div id="panel-uds-cucuta" class="uds-panel active">
-                        <div class="panel-header-cucuta p-6 rounded-t-2xl flex justify-between items-center shadow-lg w-full">
-                            <h3 class="font-bold">UDS 1 - Cúcuta</h3>
-                            <a href="https://drive.google.com/drive/folders/1MbaLHUIk2q09-ymnjGTBwMGJyKJzeZpC" target="_blank" class="bg-green-600 px-4 py-2 rounded-lg text-xs font-bold text-white">CUENTAS</a>
+                    <div id="visor-cron" class="hidden w-full px-6">
+                        <div class="flex justify-end mb-4"><a id="btn-link-cron" href="#" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold shadow">Abrir en Sheets</a></div>
+                        <div class="preview-container"><iframe id="frame-cron" class="visor-cronogramas"></iframe></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="herramientas" class="seccion-contenido py-12 bg-white w-full text-center">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-800">Herramientas Pedagógicas</h2>
+                    <p class="text-gray-500 mb-12 text-sm">Recursos interactivos para el fortalecimiento técnico y comunitario.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
+                        <div class="bg-white rounded-3xl border-2 border-green-50 shadow-lg overflow-hidden group hover:border-green-400 transition-all duration-300">
+                            <div class="h-48 bg-gray-100 overflow-hidden">
+                                <img src="https://lh3.googleusercontent.com/d/1RHfQuqBqrfPaJqY5SEOeST2EZb2YgoG3" alt="Juego Alimentación" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">Juego: Alimentación Complementaria</h3>
+                                <p class="text-gray-600 text-sm mb-6">Clasificación interactiva de alimentos por grupos de edad.</p>
+                                <a href="juego_alimentacion_comp/Juego_alimentacion_complementaria.html" target="_blank" class="inline-block w-full py-4 bg-green-600 text-white font-bold rounded-2xl hover:bg-green-700 shadow-md transition">
+                                    <i class="fas fa-play-circle mr-2"></i> JUGAR AHORA
+                                </a>
+                            </div>
                         </div>
-                        <div class="bg-white p-6 border-x grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                            <select class="select-uds-doc p-3 border rounded-lg w-full" data-uds="cucuta" data-tipo="reporte"><option value="">Reportes CUENTAME</option><option value="enero">ENERO</option><option value="febrero">FEBRERO</option><option value="marzo">MARZO</option><option value="abril">ABRIL</option><option value="mayo">MAYO</option></select>
-                            <select class="select-uds-doc p-3 border rounded-lg w-full" data-uds="cucuta" data-tipo="revision"><option value="">Revisión Carpetas</option><option value="enero">ENERO</option><option value="febrero">FEBRERO</option><option value="marzo">MARZO</option><option value="abril">ABRIL</option><option value="mayo">MAYO</option></select>
+                        <div class="bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center p-12 opacity-60"><i class="fas fa-plus-circle text-4xl text-gray-300 mb-4"></i><span class="font-medium text-gray-400">Próximamente</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="uds" class="seccion-contenido seccion-uds-compacta bg-gray-100 w-full text-center">
+                <div class="container-fluid px-4">
+                    <h2 class="text-3xl font-bold titulo-uds-compacto text-gray-800">Unidades de Servicio (UDS)</h2>
+                    <div class="flex justify-center mb-0 text-sm"><div class="inline-flex bg-white p-1 rounded-xl shadow-md border overflow-hidden"><button class="tab-button-uds px-8 py-3 font-bold active" data-uds="cucuta">UDS CÚCUTA</button><button class="tab-button-uds px-8 py-3 font-bold" data-uds="elzulia">UDS EL ZULIA</button></div></div>
+                    
+                    <div id="panel-uds-cucuta" class="uds-panel block">
+                        <div class="panel-header-cucuta p-5 rounded-t-2xl flex justify-between items-center shadow-lg w-full text-white"><h3 class="font-bold text-xl">UDS 1 - Cúcuta</h3></div>
+                        <div class="bg-white px-6 py-4 border-x grid grid-cols-1 md:grid-cols-2 gap-4 w-full text-left text-sm">
+                            <button class="btn-carpeta-directa p-3 border-2 border-orange-100 rounded-lg w-full font-bold text-orange-700 hover:bg-orange-50 transition" data-uds="cucuta"><i class="fas fa-folder-open mr-2"></i> CARPETAS UDS CÚCUTA</button>
+                            <select class="select-uds-doc p-3 border rounded-lg w-full" data-uds="cucuta" data-tipo="revision">
+                                <option value="">Revisión Cargue de Carpetas</option>
+                                <option value="enero">ENERO</option><option value="febrero">FEBRERO</option><option value="marzo">MARZO</option><option value="abril">ABRIL</option><option value="mayo">MAYO</option>
+                            </select>
                         </div>
                         <div id="visor-uds-cucuta" class="visor-uds hidden bg-white p-4 border-x border-b rounded-b-2xl shadow-xl w-full">
-                            <div class="flex justify-end mb-4"><a id="btn-uds-cucuta" class="bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold shadow" href="#" target="_blank">Abrir Recurso</a></div>
-                            <div class="preview-container w-full"><iframe id="frame-uds-cucuta"></iframe></div>
+                            <div class="text-right mb-4"><a id="btn-uds-cucuta" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow" href="#" target="_blank">Abrir en otra pestaña</a></div>
+                            <div class="preview-container"><iframe id="frame-uds-cucuta"></iframe></div>
                         </div>
                     </div>
-                    <div id="panel-uds-elzulia" class="uds-panel hidden w-full">
-                        <div class="panel-header-zulia p-6 rounded-t-2xl flex justify-between items-center shadow-lg w-full">
-                            <h3 class="font-bold">UDS 2 - El Zulia</h3>
-                            <a href="https://drive.google.com/drive/folders/1mrRyuTXmCPCsZTUy_TAAI6BKCzT56NJp" target="_blank" class="bg-green-700 px-4 py-2 rounded-lg text-xs font-bold text-white">CUENTAS</a>
-                        </div>
-                        <div class="bg-white p-6 border-x grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                            <select class="select-uds-doc p-3 border rounded-lg w-full" data-uds="elzulia" data-tipo="reporte"><option value="">Reportes CUENTAME</option><option value="enero">ENERO</option><option value="febrero">FEBRERO</option><option value="marzo">MARZO</option><option value="abril">ABRIL</option><option value="mayo">MAYO</option></select>
-                            <select class="select-uds-doc p-3 border rounded-lg w-full" data-uds="elzulia" data-tipo="revision"><option value="">Revisión Carpetas</option><option value="enero">ENERO</option><option value="febrero">FEBRERO</option><option value="marzo">MARZO</option><option value="abril">ABRIL</option><option value="mayo">MAYO</option></select>
+
+                    <div id="panel-uds-elzulia" class="uds-panel hidden">
+                        <div class="panel-header-zulia p-5 rounded-t-2xl flex justify-between items-center shadow-lg w-full text-white"><h3 class="font-bold text-xl">UDS 2 - El Zulia</h3></div>
+                        <div class="bg-white px-6 py-4 border-x grid grid-cols-1 md:grid-cols-2 gap-4 w-full text-left text-sm">
+                            <button class="btn-carpeta-directa p-3 border-2 border-blue-100 rounded-lg w-full font-bold text-blue-700 hover:bg-blue-50 transition" data-uds="elzulia"><i class="fas fa-folder-open mr-2"></i> CARPETAS UDS EL ZULIA</button>
+                            <select class="select-uds-doc p-3 border rounded-lg w-full" data-uds="elzulia" data-tipo="revision">
+                                <option value="">Revisión Cargue de Carpetas</option>
+                                <option value="enero">ENERO</option><option value="febrero">FEBRERO</option><option value="marzo">MARZO</option><option value="abril">ABRIL</option><option value="mayo">MAYO</option>
+                            </select>
                         </div>
                         <div id="visor-uds-elzulia" class="visor-uds hidden bg-white p-4 border-x border-b rounded-b-2xl shadow-xl w-full">
-                            <div class="flex justify-end mb-4"><a id="btn-uds-elzulia" class="bg-blue-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow" href="#" target="_blank">Abrir Recurso</a></div>
-                            <div class="preview-container w-full"><iframe id="frame-uds-elzulia"></iframe></div>
+                            <div class="text-right mb-4"><a id="btn-uds-elzulia" class="bg-blue-800 text-white px-4 py-2 rounded-lg text-sm font-bold shadow" href="#" target="_blank">Abrir en otra pestaña</a></div>
+                            <div class="preview-container"><iframe id="frame-uds-elzulia"></iframe></div>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
-        <footer class="gradient-bg text-white py-6 text-center mt-auto"><p class="text-[10px]">© 2026 SIAPD - ESE IMSALUD / ICBF</p></footer>
+        <footer class="gradient-bg text-white py-6 text-center mt-auto"><p class="text-[11px]">© 2026 SIAPD - ESE IMSALUD / ICBF | Gestión Institucional</p></footer>
     </div>
     <script src="script.js"></script>
 </body>
