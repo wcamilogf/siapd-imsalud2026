@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const accessInput = document.getElementById('access-password');
     const loginErr = document.getElementById('login-error');
     const login = () => {
-        if(accessInput.value === "SIAPD2026*"){ sessionStorage.setItem('accesoSIAPD','true'); document.getElementById('login-screen').style.display='none'; document.getElementById('main-content').style.display='block'; }
+        if(accessInput.value === "SIAPD2026."){ sessionStorage.setItem('accesoSIAPD','true'); document.getElementById('login-screen').style.display='none'; document.getElementById('main-content').style.display='block'; }
         else { loginErr.classList.replace('invisible','visible'); }
     };
     accessInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') login(); });
